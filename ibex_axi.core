@@ -1,0 +1,39 @@
+CAPI=2:
+name: caslab:rtos:ibex_axi:1.0.0
+description: Ibex RISC-V core with AXI interface
+
+filesets:
+    headers:
+        files:
+            - axi/typedef.svh: {is_include_file: true, include_path: axi}
+            - axi/assign.svh: {is_include_file: true, include_path: axi}
+            - common_cells/registers.svh: {is_include_file: true, include_path: common_cells}
+            - common_cells/assertions.svh: {is_include_file: true, include_path: common_cells}
+        file_type: systemVerilogSource
+
+    sv_rtl:
+        files:
+            - rtl/ibex_axi.sv
+            - rtl/ibex_axi_ip.sv
+        file_type: systemVerilogSource
+        depend:
+            - lowrisc:ibex:ibex_top:0.1
+            - pulp-platform.org::axi:0.38.0
+            - pulp-platform.org::common_cells:1.29.0
+
+    v_rtl:
+        files:
+            - rtl/ibex_axi_verilog_wrapper.v
+        file_type: verilogSource
+
+targets:
+    default: &default
+        filesets:
+            - headers
+            - sv_rtl
+            - v_rtl
+        toplevel: ibex_axi_verilog_wrapper
+        default_tool: vivado
+        tools:
+            vivado:
+                part: xc7z020clg400-1
