@@ -3,14 +3,6 @@ name: caslab:rtos:ibex_axi:1.0.0
 description: Ibex RISC-V core with AXI interface
 
 filesets:
-    headers:
-        files:
-            - axi/typedef.svh: {is_include_file: true, include_path: axi}
-            - axi/assign.svh: {is_include_file: true, include_path: axi}
-            - common_cells/registers.svh: {is_include_file: true, include_path: common_cells}
-            - common_cells/assertions.svh: {is_include_file: true, include_path: common_cells}
-        file_type: systemVerilogSource
-
     sv_rtl:
         files:
             - rtl/ibex_axi.sv
@@ -29,7 +21,6 @@ filesets:
 targets:
     default: &default
         filesets:
-            - headers
             - sv_rtl
             - v_rtl
         toplevel: ibex_axi_verilog_wrapper
