@@ -13,9 +13,30 @@ typedef logic [3:0]  axi_strb_t;
 `AXI_TYPEDEF_RESP_T   (axi_rsp_t, axi_b_t, axi_r_t)
 
 
-module ibex_axi # (
+module ibex_axi import ibex_pkg::*; # (
   parameter type axi_req_t = axi_req_t,
-  parameter type axi_rsp_t = axi_rsp_t
+  parameter type axi_rsp_t = axi_rsp_t,
+
+  parameter bit          IBEX_PMPEnable        = 1'b0,
+  parameter int unsigned IBEX_PMPGranularity   = 0,
+  parameter int unsigned IBEX_PMPNumRegions    = 4,
+  parameter int unsigned IBEX_MHPMCounterNum   = 0,
+  parameter int unsigned IBEX_MHPMCounterWidth = 40,
+  parameter bit          IBEX_RV32E            = 1'b0,
+  parameter rv32m_e      IBEX_RV32M            = RV32MFast, // int
+  parameter rv32b_e      IBEX_RV32B            = RV32BNone, // int
+  parameter regfile_e    IBEX_RegFile          = RegFileFF, // int
+  parameter bit          IBEX_BranchTargetALU  = 1'b0,
+  parameter bit          IBEX_WritebackStage   = 1'b0,
+  parameter bit          IBEX_ICache           = 1'b0,
+  parameter bit          IBEX_ICacheECC        = 1'b0,
+  parameter bit          IBEX_BranchPredictor  = 1'b0,
+  parameter bit          IBEX_DbgTriggerEn     = 1'b0,
+  parameter int unsigned IBEX_DbgHwBreakNum    = 1,
+  parameter bit          IBEX_SecureIbex       = 1'b0,
+  parameter bit          IBEX_ICacheScramble   = 1'b0,
+  parameter int unsigned IBEX_DmHaltAddr       = 32'h1A110800,
+  parameter int unsigned IBEX_DmExceptionAddr  = 32'h1A110808
 )(
   input  logic         clk_i,
   input  logic         rst_ni,
@@ -60,7 +81,26 @@ module ibex_axi # (
   logic [6:0]  data_rdata_intg;
   logic        data_err;
 
-  ibex_top i_ibex (
+  ibex_top # (
+    .PMPEnable        (IBEX_PMPEnable), 
+    .PMPGranularity   (IBEX_PMPGranularity), 
+    .PMPNumRegions    (IBEX_PMPNumRegions), 
+    .MHPMCounterNum   (IBEX_MHPMCounterNum), 
+    .MHPMCounterWidth (IBEX_MHPMCounterWidth), 
+    .RV32E            (IBEX_RV32E), 
+    .RV32M            (IBEX_RV32M), 
+    .RV32B            (IBEX_RV32B), 
+    .RegFile          (IBEX_RegFile), 
+    .BranchTargetALU  (IBEX_BranchTargetALU), 
+    .WritebackStage   (IBEX_WritebackStage), 
+    .ICache           (IBEX_ICache), 
+    .ICacheECC        (IBEX_ICacheECC), 
+    .BranchPredictor  (IBEX_BranchPredictor), 
+    .SecureIbex       (IBEX_SecureIbex), 
+    .ICacheScramble   (IBEX_ICacheScramble), 
+    .DmHaltAddr       (IBEX_DmHaltAddr), 
+    .DmExceptionAddr  (IBEX_DmExceptionAddr) 
+  ) i_ibex (
     // Clock and Reset
     .clk_i,
     .rst_ni,

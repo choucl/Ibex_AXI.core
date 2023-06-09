@@ -23,7 +23,28 @@
         parameter integer C_M01_AXI_ARUSER_WIDTH    = 0,
         parameter integer C_M01_AXI_WUSER_WIDTH     = 0,
         parameter integer C_M01_AXI_RUSER_WIDTH     = 0,
-        parameter integer C_M01_AXI_BUSER_WIDTH     = 0
+        parameter integer C_M01_AXI_BUSER_WIDTH     = 0,
+
+        parameter         IBEX_PMPEnable            = 1'b0,
+        parameter integer IBEX_PMPGranularity       = 0,
+        parameter integer IBEX_PMPNumRegions        = 4,
+        parameter integer IBEX_MHPMCounterNum       = 0,
+        parameter integer IBEX_MHPMCounterWidth     = 40,
+        parameter         IBEX_RV32E                = 1'b0,
+        parameter integer IBEX_RV32M                = 2,  // RV32MFast, // int
+        parameter integer IBEX_RV32B                = 0,  // RV32BNone, // int
+        parameter integer IBEX_RegFile              = 0,  // RegFileFF, // int
+        parameter         IBEX_BranchTargetALU      = 1'b0,
+        parameter         IBEX_WritebackStage       = 1'b0,
+        parameter         IBEX_ICache               = 1'b0,
+        parameter         IBEX_ICacheECC            = 1'b0,
+        parameter         IBEX_BranchPredictor      = 1'b0,
+        parameter         IBEX_DbgTriggerEn         = 1'b0,
+        parameter integer IBEX_DbgHwBreakNum        = 1,
+        parameter         IBEX_SecureIbex           = 1'b0,
+        parameter         IBEX_ICacheScramble       = 1'b0,
+        parameter integer IBEX_DmHaltAddr           = 32'h1A110800,
+        parameter integer IBEX_DmExceptionAddr      = 32'h1A110808
     ) (
         input  wire                                m00_m01_axi_aclk,
         input  wire                                m00_m01_axi_aresetn,
@@ -144,7 +165,25 @@
         .C_M01_AXI_ARUSER_WIDTH           (C_M01_AXI_ARUSER_WIDTH),
         .C_M01_AXI_WUSER_WIDTH            (C_M01_AXI_WUSER_WIDTH),
         .C_M01_AXI_RUSER_WIDTH            (C_M01_AXI_RUSER_WIDTH),
-        .C_M01_AXI_BUSER_WIDTH            (C_M01_AXI_BUSER_WIDTH)
+        .C_M01_AXI_BUSER_WIDTH            (C_M01_AXI_BUSER_WIDTH),
+        .IBEX_PMPEnable                   (IBEX_PMPEnable), 
+        .IBEX_PMPGranularity              (IBEX_PMPGranularity), 
+        .IBEX_PMPNumRegions               (IBEX_PMPNumRegions), 
+        .IBEX_MHPMCounterNum              (IBEX_MHPMCounterNum), 
+        .IBEX_MHPMCounterWidth            (IBEX_MHPMCounterWidth), 
+        .IBEX_RV32E                       (IBEX_RV32E), 
+        .IBEX_RV32M                       (IBEX_RV32M), 
+        .IBEX_RV32B                       (IBEX_RV32B), 
+        .IBEX_RegFile                     (IBEX_RegFile), 
+        .IBEX_BranchTargetALU             (IBEX_BranchTargetALU), 
+        .IBEX_WritebackStage              (IBEX_WritebackStage), 
+        .IBEX_ICache                      (IBEX_ICache), 
+        .IBEX_ICacheECC                   (IBEX_ICacheECC), 
+        .IBEX_BranchPredictor             (IBEX_BranchPredictor), 
+        .IBEX_SecureIbex                  (IBEX_SecureIbex), 
+        .IBEX_ICacheScramble              (IBEX_ICacheScramble), 
+        .IBEX_DmHaltAddr                  (IBEX_DmHaltAddr), 
+        .IBEX_DmExceptionAddr             (IBEX_DmExceptionAddr) 
     ) i_ibex_axi_ip (
         .m00_axi_aclk      (m00_m01_axi_aclk),
         .m00_axi_aresetn   (m00_m01_axi_aresetn),
