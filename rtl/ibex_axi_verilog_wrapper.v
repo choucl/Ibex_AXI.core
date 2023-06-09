@@ -1,4 +1,10 @@
 `timescale 1 ns / 1 ps
+`define ASSERT(name, property)
+`define ASSERT_KNOWN(name, property)
+`define ASSERT_IF(name, property)
+`define ASSERT_INIT(name, property)
+`define ASSERT_KNOWN_IF(name, property)
+
 
     module ibex_axi_verilog_wrapper #
     (
