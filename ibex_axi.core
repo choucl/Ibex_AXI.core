@@ -11,7 +11,7 @@ filesets:
         depend:
             - lowrisc:ibex:ibex_top:0.1
             - pulp-platform.org::axi:0.38.0
-            - pulp-platform.org::common_cells:1.29.0
+            - pulp-platform.org::common_cells:1.30.0
 
     v_rtl:
         files:
