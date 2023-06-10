@@ -53,9 +53,9 @@
         parameter integer IBEX_DmHaltAddr           = 32'h1A110800,
         parameter integer IBEX_DmExceptionAddr      = 32'h1A110808
     ) (
-        input  wire                                m00_m01_axi_aclk,
-        input  wire                                m00_m01_axi_aresetn,
         // Ports of Axi Master Bus Interface M00_AXI
+        input  wire                                m00_axi_aclk,
+        input  wire                                m00_axi_aresetn,
         output wire [C_M00_AXI_ID_WIDTH-1 : 0]     m00_axi_awid,
         output wire [C_M00_AXI_ADDR_WIDTH-1 : 0]   m00_axi_awaddr,
         output wire [7 : 0]                        m00_axi_awlen,
@@ -100,6 +100,8 @@
         output wire                                m00_axi_rready,
 
         // Ports of Axi Master Bus Interface M01_AXI
+        input  wire                                m01_axi_aclk,
+        input  wire                                m01_axi_aresetn,
         output wire [C_M00_AXI_ID_WIDTH-1 : 0]     m01_axi_awid,
         output wire [C_M00_AXI_ADDR_WIDTH-1 : 0]   m01_axi_awaddr,
         output wire [7 : 0]                        m01_axi_awlen,
@@ -192,8 +194,8 @@
         .IBEX_DmHaltAddr                  (IBEX_DmHaltAddr), 
         .IBEX_DmExceptionAddr             (IBEX_DmExceptionAddr) 
     ) i_ibex_axi_ip (
-        .m00_axi_aclk      (m00_m01_axi_aclk),
-        .m00_axi_aresetn   (m00_m01_axi_aresetn),
+        .m00_axi_aclk      (m00_axi_aclk),
+        .m00_axi_aresetn   (m00_axi_aresetn),
         .m00_axi_awid      (m00_axi_awid),
         .m00_axi_awaddr    (m00_axi_awaddr),
         .m00_axi_awlen     (m00_axi_awlen),
@@ -238,8 +240,8 @@
         .m00_axi_rready    (m00_axi_rready),
 
         // Ports of Axi Master Bus Interface M01_AXI
-        .m01_axi_aclk      (m00_m01_axi_aclk),
-        .m01_axi_aresetn   (m00_m01_axi_aresetn),
+        .m01_axi_aclk      (m01_axi_aclk),
+        .m01_axi_aresetn   (m01_axi_aresetn),
         .m01_axi_awid      (m01_axi_awid),
         .m01_axi_awaddr    (m01_axi_awaddr),
         .m01_axi_awlen     (m01_axi_awlen),
