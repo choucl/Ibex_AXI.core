@@ -4,6 +4,7 @@
 `define ASSERT_IF(name, property)
 `define ASSERT_INIT(name, property)
 `define ASSERT_KNOWN_IF(name, property)
+`define ASSERT_INIT_NET(name, property)
 
 
     module ibex_axi_verilog_wrapper #
