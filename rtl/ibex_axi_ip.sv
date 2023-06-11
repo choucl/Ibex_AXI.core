@@ -23,28 +23,7 @@
         parameter integer C_M01_AXI_ARUSER_WIDTH    = 0,
         parameter integer C_M01_AXI_WUSER_WIDTH     = 0,
         parameter integer C_M01_AXI_RUSER_WIDTH     = 0,
-        parameter integer C_M01_AXI_BUSER_WIDTH     = 0,
-
-        parameter bit          IBEX_PMPEnable        = 1'b0,
-        parameter int unsigned IBEX_PMPGranularity   = 0,
-        parameter int unsigned IBEX_PMPNumRegions    = 4,
-        parameter int unsigned IBEX_MHPMCounterNum   = 0,
-        parameter int unsigned IBEX_MHPMCounterWidth = 40,
-        parameter bit          IBEX_RV32E            = 1'b0,
-        parameter rv32m_e      IBEX_RV32M            = RV32MFast, // int
-        parameter rv32b_e      IBEX_RV32B            = RV32BNone, // int
-        parameter regfile_e    IBEX_RegFile          = RegFileFF, // int
-        parameter bit          IBEX_BranchTargetALU  = 1'b0,
-        parameter bit          IBEX_WritebackStage   = 1'b0,
-        parameter bit          IBEX_ICache           = 1'b0,
-        parameter bit          IBEX_ICacheECC        = 1'b0,
-        parameter bit          IBEX_BranchPredictor  = 1'b0,
-        parameter bit          IBEX_DbgTriggerEn     = 1'b0,
-        parameter int unsigned IBEX_DbgHwBreakNum    = 1,
-        parameter bit          IBEX_SecureIbex       = 1'b0,
-        parameter bit          IBEX_ICacheScramble   = 1'b0,
-        parameter int unsigned IBEX_DmHaltAddr       = 32'h1A110800,
-        parameter int unsigned IBEX_DmExceptionAddr  = 32'h1A110808
+        parameter integer C_M01_AXI_BUSER_WIDTH     = 0
     )
     (
         // Ports of Axi Master Bus Interface M00_AXI
@@ -260,25 +239,7 @@
 
     ibex_axi # (
       .axi_req_t (axi_req_t),
-      .axi_rsp_t (axi_rsp_t),
-      .IBEX_PMPEnable        (IBEX_PMPEnable), 
-      .IBEX_PMPGranularity   (IBEX_PMPGranularity), 
-      .IBEX_PMPNumRegions    (IBEX_PMPNumRegions), 
-      .IBEX_MHPMCounterNum   (IBEX_MHPMCounterNum), 
-      .IBEX_MHPMCounterWidth (IBEX_MHPMCounterWidth), 
-      .IBEX_RV32E            (IBEX_RV32E), 
-      .IBEX_RV32M            (IBEX_RV32M), 
-      .IBEX_RV32B            (IBEX_RV32B), 
-      .IBEX_RegFile          (IBEX_RegFile), 
-      .IBEX_BranchTargetALU  (IBEX_BranchTargetALU), 
-      .IBEX_WritebackStage   (IBEX_WritebackStage), 
-      .IBEX_ICache           (IBEX_ICache), 
-      .IBEX_ICacheECC        (IBEX_ICacheECC), 
-      .IBEX_BranchPredictor  (IBEX_BranchPredictor), 
-      .IBEX_SecureIbex       (IBEX_SecureIbex), 
-      .IBEX_ICacheScramble   (IBEX_ICacheScramble), 
-      .IBEX_DmHaltAddr       (IBEX_DmHaltAddr), 
-      .IBEX_DmExceptionAddr  (IBEX_DmExceptionAddr) 
+      .axi_rsp_t (axi_rsp_t)
     ) ibex_axi_i (
       .clk_i                  (m00_axi_aclk),
       .rst_ni                 (m00_axi_aresetn),

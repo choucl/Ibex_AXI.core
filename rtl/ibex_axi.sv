@@ -15,28 +15,7 @@ typedef logic [3:0]  axi_strb_t;
 
 module ibex_axi import ibex_pkg::*; # (
   parameter type axi_req_t = axi_req_t,
-  parameter type axi_rsp_t = axi_rsp_t,
-
-  parameter bit          IBEX_PMPEnable        = 1'b0,
-  parameter int unsigned IBEX_PMPGranularity   = 0,
-  parameter int unsigned IBEX_PMPNumRegions    = 4,
-  parameter int unsigned IBEX_MHPMCounterNum   = 0,
-  parameter int unsigned IBEX_MHPMCounterWidth = 40,
-  parameter bit          IBEX_RV32E            = 1'b0,
-  parameter rv32m_e      IBEX_RV32M            = RV32MFast, // int
-  parameter rv32b_e      IBEX_RV32B            = RV32BNone, // int
-  parameter regfile_e    IBEX_RegFile          = RegFileFF, // int
-  parameter bit          IBEX_BranchTargetALU  = 1'b0,
-  parameter bit          IBEX_WritebackStage   = 1'b0,
-  parameter bit          IBEX_ICache           = 1'b0,
-  parameter bit          IBEX_ICacheECC        = 1'b0,
-  parameter bit          IBEX_BranchPredictor  = 1'b0,
-  parameter bit          IBEX_DbgTriggerEn     = 1'b0,
-  parameter int unsigned IBEX_DbgHwBreakNum    = 1,
-  parameter bit          IBEX_SecureIbex       = 1'b0,
-  parameter bit          IBEX_ICacheScramble   = 1'b0,
-  parameter int unsigned IBEX_DmHaltAddr       = 32'h1A110800,
-  parameter int unsigned IBEX_DmExceptionAddr  = 32'h1A110808
+  parameter type axi_rsp_t = axi_rsp_t
 )(
   input  logic         clk_i,
   input  logic         rst_ni,
@@ -65,7 +44,6 @@ module ibex_axi import ibex_pkg::*; # (
   logic        instr_rvalid;
   logic [31:0] instr_addr;
   logic [31:0] instr_rdata;
-  logic [6:0]  instr_rdata_intg;
   logic        instr_err;
 
   // Data memory interface
@@ -76,30 +54,27 @@ module ibex_axi import ibex_pkg::*; # (
   logic [3:0]  data_be;
   logic [31:0] data_addr;
   logic [31:0] data_wdata;
-  logic [6:0]  data_wdata_intg;
   logic [31:0] data_rdata;
-  logic [6:0]  data_rdata_intg;
   logic        data_err;
 
   ibex_top # (
-    .PMPEnable        (IBEX_PMPEnable), 
-    .PMPGranularity   (IBEX_PMPGranularity), 
-    .PMPNumRegions    (IBEX_PMPNumRegions), 
-    .MHPMCounterNum   (IBEX_MHPMCounterNum), 
-    .MHPMCounterWidth (IBEX_MHPMCounterWidth), 
-    .RV32E            (IBEX_RV32E), 
-    .RV32M            (IBEX_RV32M), 
-    .RV32B            (IBEX_RV32B), 
-    .RegFile          (IBEX_RegFile), 
-    .BranchTargetALU  (IBEX_BranchTargetALU), 
-    .WritebackStage   (IBEX_WritebackStage), 
-    .ICache           (IBEX_ICache), 
-    .ICacheECC        (IBEX_ICacheECC), 
-    .BranchPredictor  (IBEX_BranchPredictor), 
-    .SecureIbex       (IBEX_SecureIbex), 
-    .ICacheScramble   (IBEX_ICacheScramble), 
-    .DmHaltAddr       (IBEX_DmHaltAddr), 
-    .DmExceptionAddr  (IBEX_DmExceptionAddr) 
+    .PMPEnable        (0), 
+    .PMPGranularity   (0), 
+    .PMPNumRegions    (4), 
+    .MHPMCounterNum   (0), 
+    .MHPMCounterWidth (40), 
+    .RV32E            (0), 
+    .RV32M            (ibex_pkg::RV32MSingleCycle), 
+    .RV32B            (ibex_pkg::RV32BBalanced), 
+    .RegFile          (ibex_pkg::RegFileFF), 
+    .BranchTargetALU  (1), 
+    .WritebackStage   (1), 
+    .ICache           (0), 
+    .ICacheECC        (0), 
+    .BranchPredictor  (0), 
+    .SecureIbex       (0), 
+    .ICacheScramble   (0), 
+    .DbgTriggerEn     (0)
   ) i_ibex (
     // Clock and Reset
     .clk_i,
@@ -122,7 +97,7 @@ module ibex_axi import ibex_pkg::*; # (
     .data_be_o            (data_be),
     .data_addr_o          (data_addr),
     .data_wdata_o         (data_wdata),
-    .data_wdata_intg_o    (data_wdata_intg),
+    .data_wdata_intg_o    (),
     .data_rdata_i         (data_rdata),
     .data_rdata_intg_i    (7'd0),
     .data_err_i           (data_err),
@@ -150,7 +125,7 @@ module ibex_axi import ibex_pkg::*; # (
     .MemAddrWidth  (32),
     .AxiAddrWidth  (32),
     .DataWidth     (32),
-    .MaxRequests   (1),
+    .MaxRequests   (0),
     .axi_req_t     (axi_req_t),
     .axi_rsp_t     (axi_rsp_t)
   ) i_instr_axi (
@@ -175,7 +150,7 @@ module ibex_axi import ibex_pkg::*; # (
     .MemAddrWidth  (32),
     .AxiAddrWidth  (32),
     .DataWidth     (32),
-    .MaxRequests   (1),
+    .MaxRequests   (0),
     .axi_req_t     (axi_req_t),
     .axi_rsp_t     (axi_rsp_t)
   ) i_data_axi ( 
