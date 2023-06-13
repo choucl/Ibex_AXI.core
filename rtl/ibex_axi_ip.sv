@@ -138,7 +138,7 @@
     assign m00_axi_awaddr  = instr_axi_req.aw.addr;
     assign m00_axi_awlen   = instr_axi_req.aw.len;
     assign m00_axi_awsize  = instr_axi_req.aw.size;
-    assign m00_axi_awburst = instr_axi_req.aw.burst;
+    assign m00_axi_awburst = 2'b01;  // INCR
     assign m00_axi_awlock  = instr_axi_req.aw.lock;
     assign m00_axi_awcache = instr_axi_req.aw.cache;
     assign m00_axi_awprot  = instr_axi_req.aw.prot;
@@ -158,7 +158,7 @@
     assign m00_axi_araddr  = instr_axi_req.ar.addr;
     assign m00_axi_arlen   = instr_axi_req.ar.len;
     assign m00_axi_arsize  = instr_axi_req.ar.size;
-    assign m00_axi_arburst = instr_axi_req.ar.burst;
+    assign m00_axi_arburst = 2'b01;  // INCR
     assign m00_axi_arlock  = instr_axi_req.ar.lock;
     assign m00_axi_arcache = instr_axi_req.ar.cache;
     assign m00_axi_arprot  = instr_axi_req.ar.prot;
@@ -190,7 +190,7 @@
     assign m01_axi_awaddr  = data_axi_req.aw.addr;
     assign m01_axi_awlen   = data_axi_req.aw.len;
     assign m01_axi_awsize  = data_axi_req.aw.size;
-    assign m01_axi_awburst = data_axi_req.aw.burst;
+    assign m01_axi_awburst = 2'b01;  // INCR
     assign m01_axi_awlock  = data_axi_req.aw.lock;
     assign m01_axi_awcache = data_axi_req.aw.cache;
     assign m01_axi_awprot  = data_axi_req.aw.prot;
@@ -210,7 +210,7 @@
     assign m01_axi_araddr  = data_axi_req.ar.addr;
     assign m01_axi_arlen   = data_axi_req.ar.len;
     assign m01_axi_arsize  = data_axi_req.ar.size;
-    assign m01_axi_arburst = data_axi_req.ar.burst;
+    assign m01_axi_arburst = 2'b01;  // INCR
     assign m01_axi_arlock  = data_axi_req.ar.lock;
     assign m01_axi_arcache = data_axi_req.ar.cache;
     assign m01_axi_arprot  = data_axi_req.ar.prot;

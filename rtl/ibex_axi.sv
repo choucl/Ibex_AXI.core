@@ -125,7 +125,7 @@ module ibex_axi import ibex_pkg::*; # (
     .MemAddrWidth  (32),
     .AxiAddrWidth  (32),
     .DataWidth     (32),
-    .MaxRequests   (0),
+    .MaxRequests   (1),
     .axi_req_t     (axi_req_t),
     .axi_rsp_t     (axi_rsp_t)
   ) i_instr_axi (
@@ -150,7 +150,7 @@ module ibex_axi import ibex_pkg::*; # (
     .MemAddrWidth  (32),
     .AxiAddrWidth  (32),
     .DataWidth     (32),
-    .MaxRequests   (0),
+    .MaxRequests   (1),
     .axi_req_t     (axi_req_t),
     .axi_rsp_t     (axi_rsp_t)
   ) i_data_axi ( 
