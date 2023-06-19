@@ -18,13 +18,20 @@ filesets:
             - rtl/ibex_axi_verilog_wrapper.v
         file_type: verilogSource
 
+    constrs:
+        files:
+            - data/caslab_rtos_ibex_soc_design_2.xdc
+        file_type: xdc
+
 targets:
     default: &default
         filesets:
             - sv_rtl
             - v_rtl
+            - constrs
         toplevel: ibex_axi_verilog_wrapper
         default_tool: vivado
         tools:
             vivado:
+                jobs: 4
                 part: xc7z020clg400-1
